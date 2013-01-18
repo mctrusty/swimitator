@@ -22,7 +22,7 @@ tokens = (
 t_ignore = ' \t'
 
 def t_newline(t):
-    r"\n"
+	r"\n"
 	t.lexer.lineno += len(t.value)
 	
 t_AT = (r"@")
@@ -55,6 +55,8 @@ def t_NUMBER(t):
 def t_error(t):
     raise TypeError("Unknown text '%s'" % (t.value,))
     
+lex.lex()
+
 if __name__ == "__main__":
 	wkout = """3 x { 
 		2x50 fr @1:00 
@@ -62,8 +64,6 @@ if __name__ == "__main__":
 		}
 		10 x 100 K EN3 @1:30
 	"""
-	lex.lex()
-	lex.input(wkout)
-	
+	lex.input(wkout)	
 	for tok in iter(lex.token, None):
 		print repr(tok.type), repr(tok.value)
