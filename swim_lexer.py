@@ -6,20 +6,24 @@
 from ply import lex
 
 tokens = (
-	"L_BRACKET",
-	"R_BRACKET",
-	"NUMBER",
-	"MULT",
-	"COLON",
-	"AT",
-	"ZONE"
+    "L_BRACKET",
+    "R_BRACKET",
+    "KICK",
+    "DRILL",
+    "STROKE",
+    "OTHER",
+    "NUMBER",
+    "MULT",
+    "COLON",
+    "AT",
+    "ZONE"
 )
 
-t_ignore = r" \t"
+t_ignore = ' \t'
 
 def t_newline(t):
-	r"\n"
-	t.lexer.lineno += 1
+    r"\n"
+    t.lexer.lineno += 1
 
 t_AT = (r"@")
 
@@ -30,11 +34,17 @@ t_R_BRACKET = ( r"}")
 t_COLON = (r":")
 
 t_MULT = (
-	r"x|X"
+    r"x|X"
 )
 
+t_KICK = ( r"[Kk](ick)?")
+
+t_DRILL = ( r"[Dd]r(ill)?")
+
+t_STROKE = ( r"[Ff]ly?|[Bb]r(east)?|[Bb](a|k)(ck)?|[Ff]r(ee)?")
+
 t_ZONE = (
-	r"EN|ZONE"
+    r"EN|ZONE"
 )
 
 def t_NUMBER(t):
@@ -48,9 +58,11 @@ def t_error(t):
 lex.lex()
 
 wkout = """3 x { 
-	2x50@1:00 
-	EN1 100@2 
-	}"""
+    2x50 fr @1:00 
+    1x100 drill @2 
+    }
+	10 x 100 K EN3 @1:30
+"""
 
 lex.input(wkout)
 for tok in iter(lex.token, None):
