@@ -9,3 +9,16 @@ class Node:
 		
 	def __repr__(self):
 		return "Set info %s" % (self.children)
+
+		
+class Interval:
+	def __init__(self, minutes=0, seconds=0):
+		self.type = "interval"
+		self.minutes = minutes
+		self.seconds = seconds
+		
+	def __repr__(self):
+		return str(self.minutes * 60 + self.seconds)
+		
+	def total_seconds(self):
+		return self.minutes * 60 + self.seconds

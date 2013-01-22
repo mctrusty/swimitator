@@ -6,7 +6,7 @@
 from ply import lex
 from ply import yacc
 from swim_lexer import tokens
-from Node import Node
+from Node import *
 
 def p_set(p):
 	"""
@@ -80,11 +80,11 @@ def p_interval(p):
 			   | empty
 	"""
 	if len(p) == 5:
-		p[0] = p[2] * 60 + p[4]
+		p[0] = Interval(p[2],p[4])
 	elif len(p) == 3:
-		p[0] = p[2]
+		p[0] = Interval(0,p[2])
 	else:
-		p[0] = 0
+		p[0] = Interval(0,0)
 		
 def p_error(p):
 	raise TypeError("Unknown Text '%s'" % (t.value,))
