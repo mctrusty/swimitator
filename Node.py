@@ -22,3 +22,4 @@ class Interval:
 		
 	def total_seconds(self):
 		return self.minutes * 60 + self.seconds
+		

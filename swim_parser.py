@@ -8,11 +8,26 @@ from ply import yacc
 from swim_lexer import tokens
 from Node import *
 
+def p_workout(p):
+        """
+        set_list : empty
+	set_list : set_list set
+	"""
+        if len(p)==1:
+                p[0] = p[1]
+        else:
+                p[0] = p[1] + [p[2]]
+
+def p_set_list(p):
+	"""
+	set_list : set
+	"""
+	p[0] = [p[1]]
+
 def p_set(p):
 	"""
-	set : empty
-		  | count skill zone interval
-		  | count kick zone interval
+	set : count skill zone interval
+	    | count kick zone interval
 	"""
 	if len(p) == 1:
 		p[0] = []
