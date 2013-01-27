@@ -24,6 +24,13 @@ def p_set_list(p):
 	"""
 	p[0] = [p[1]]
 
+        def p_super_set(p):
+        """
+        set_list : NUMBER MULT L_BRACKET set_list R_BRACKET
+        """
+
+        p[0] = [p[1],p[4]]
+
 def p_set(p):
 	"""
 	set : count skill zone interval
@@ -33,7 +40,7 @@ def p_set(p):
 		p[0] = []
 	else:
 		p[0] = Node("set",[p[1] ,p[2], p[3],p[4]])
-	
+        
 def p_empty(p):
 	'empty :'
 	pass
