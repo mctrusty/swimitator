@@ -25,4 +25,35 @@ class Interval(Node):
 		
 	def total_seconds(self):
 		return self.minutes * 60 + self.seconds
-		
+
+class Zone(Node):
+        def __init__(self, zone=""):
+                self.type="zone"
+                self.zone = zone
+
+        def __repr__(self):
+                return self.zone
+
+class Kick(Node):
+        def __init__(self, stroke="free"):
+               self.type="kick"
+               self.stroke = stroke
+
+        def __repr__(self):
+                return self.stroke
+
+class Drill(Node):
+        def __init__(self,stroke="",drill=""):
+                self.type = "drill"
+                self.stroke = stroke
+                self.drill = drill
+
+        def __repr__(self):
+                return self.drill + ' ' + self.stroke
+
+class Stroke(Node):
+        def __init__(self, stroke=""):
+                self.type = "stroke"
+                self.stroke = stroke
+
+        
