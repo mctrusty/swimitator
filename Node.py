@@ -1,5 +1,8 @@
 class Node:
-	def __init__(self, type, children=None, leaf=None):
+        pass
+
+class Set(Node):
+        def __init__(self, type, children=None, leaf=None):
 		self.type = type
 		if children:
 			self.children = children
@@ -11,7 +14,7 @@ class Node:
 		return "Set info %s" % (self.children)
 
 		
-class Interval:
+class Interval(Node):
 	def __init__(self, minutes=0, seconds=0):
 		self.type = "interval"
 		self.minutes = minutes
