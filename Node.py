@@ -13,7 +13,15 @@ class Set(Node):
 	def __repr__(self):
 		return "Set info %s" % (self.children)
 
-		
+class Count(Node):
+        def __init__(self, reps, value):
+                self.type = "count"
+                self.reps = reps
+                self.distance = value
+
+        def __repr__(self):
+                return "<reps>" + str(self.reps) + "</reps>" + "<distance>" + str(self.distance) + "</distance>"
+        
 class Interval(Node):
 	def __init__(self, minutes=0, seconds=0):
 		self.type = "interval"
@@ -32,7 +40,7 @@ class Zone(Node):
                 self.zone = zone
 
         def __repr__(self):
-                return self.zone
+                return "<zone>" + self.zone + "</zone>"
 
 class Kick(Node):
         def __init__(self, stroke="free"):
@@ -56,4 +64,6 @@ class Stroke(Node):
                 self.type = "stroke"
                 self.stroke = stroke
 
-        
+        def __repr__(self):
+                return "<stroke>" + self.stroke + "</stroke>"
+

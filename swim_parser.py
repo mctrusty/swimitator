@@ -48,58 +48,58 @@ def p_empty(p):
 def p_count(p):
 	"""
 	count : NUMBER
-			 | NUMBER MULT NUMBER
+	      | NUMBER MULT NUMBER
 	"""
 	if len(p) == 2:
-		p[0] = (1,p[1])
+		p[0] = Count(1,p[1])
 	elif len(p) == 4:
-		p[0] = (p[1] ,p[3])
+		p[0] = Count(p[1] ,p[3])
 
 def p_skill_stroke(p):
 	"""
 	skill : empty 
-		  | STROKE
+	      | STROKE
 	"""
 	if len(p) == 2:
-		p[0] = (p[1],'none')
+		p[0] = Stroke(p[1])
 	else:
-		p[0] = ('choice','none')
+		p[0] = Stroke('choice')
 		
 def p_skill_drill(p):
 	"""
 	skill : DRILL
-		   | STROKE DRILL
+	      | STROKE DRILL
 	"""
 	if len(p) == 3:
-		p[0] = (p[1],p[2])
+		p[0] = Drill(p[1],p[2])
 	else:
-		p[0] = ('choice',p[1])
+		p[0] = Drill('choice',p[1])
 
 def p_kick(p):
 	"""
 	kick : KICK
-		   | STROKE KICK
+	     | STROKE KICK
 	"""
 	if len(p) == 3:
-		p[0] = (p[1],p[2])
+		p[0] = Kick(p[1])
 	else:
-		p[0] = ('choice',p[1])
+		p[0] = Kick('choice')
 		
 def p_zone(p):
 	"""
 	zone : ZONE
-			| empty
+	     | empty
 	"""
 	if len(p)==2:
-		p[0] = p[1]
+		p[0] = Zone(p[1])
 	else:
 		p[0] = 'none'
 	
 def p_interval(p):
 	"""
 	interval : AT NUMBER COLON NUMBER
-			   | AT NUMBER
-			   | empty
+		 | AT NUMBER
+		 | empty
 	"""
 	if len(p) == 5:
 		p[0] = Interval(p[2],p[4])
