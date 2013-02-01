@@ -12,11 +12,20 @@ class SetList(Node):
 
         def add_set(self, set):
                 self.set_list.append(set)
-                return self.set_list
+                return self
 
         def get_all_sets(self):
                 return self.set_list
 
+class MultiSet(Node):
+        def __init__(self, children, repeats=1):
+                self.type = "multi_set"
+                if children:
+                        self.children = children
+                else:
+                        self.children = []
+                self.repeats = repeats
+                
 class Set(Node):
         def __init__(self, type, children=None, leaf=None):
 		self.type = type

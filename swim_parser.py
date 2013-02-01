@@ -12,6 +12,7 @@ def p_workout(p):
         """
         set_list : empty
 	set_list : set_list set
+        set_list : set_list multi_set
 	"""
         if len(p)==1:
                 p[0] = SetList()
@@ -21,15 +22,16 @@ def p_workout(p):
 def p_set_list(p):
 	"""
 	set_list : set
+                 | multi_set
 	"""
 	p[0] = SetList(p[1])
 
 def p_super_set(p):
         """
-        set_list : NUMBER MULT L_BRACKET set_list R_BRACKET
+        multi_set : NUMBER MULT L_BRACKET set_list R_BRACKET
         """
 
-        p[0] = SetList(p[4],p[1])
+        p[0] = MultiSet(p[4],p[1])
 
 def p_set(p):
 	"""
@@ -129,6 +131,8 @@ if __name__ == "__main__":
                 except EOFError:
                         break
                 if not s: continue
+                if s=='q':
+                        break
                 result = parser.parse(s,debug=log)
                 print result
 	
