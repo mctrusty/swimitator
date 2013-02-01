@@ -14,15 +14,15 @@ def p_workout(p):
 	set_list : set_list set
 	"""
         if len(p)==1:
-                p[0] = p[1]
+                p[0] = SetList()
         else:
-                p[0] = p[1] + [p[2]]
+                p[0] = p[1].add_set(p[2])
 
 def p_set_list(p):
 	"""
 	set_list : set
 	"""
-	p[0] = [p[1]]
+	p[0] = SetList(p[1])
 
 def p_super_set(p):
         """
@@ -121,12 +121,14 @@ logging.basicConfig(
 log = logging.getLogger()
 parser = yacc.yacc(debug=True)
 
-while True:
-	try: 
-		s = raw_input('set>')
-	except EOFError:
-		break
-	if not s: continue
-	result = parser.parse(s,debug=log)
-	print result
+
+if __name__ == "__main__":
+        while True:
+                try: 
+                        s = raw_input('set>')
+                except EOFError:
+                        break
+                if not s: continue
+                result = parser.parse(s,debug=log)
+                print result
 	

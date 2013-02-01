@@ -5,13 +5,14 @@ class SetList(Node):
         def __init__(self, set, repeats=1):
                 self.type = "set_list"
                 if set:
-                        self.set_list= set
+                        self.set_list= [set]
                 else:
                         self.set_list = []
                 self.repeats = repeats
 
         def add_set(self, set):
                 self.set_list.append(set)
+                return self.set_list
 
         def get_all_sets(self):
                 return self.set_list
