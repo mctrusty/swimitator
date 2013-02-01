@@ -113,18 +113,18 @@ def p_interval(p):
 def p_error(p):
 	raise TypeError("Unknown Text '%s'" % (t.value,))
 
-import logging
-logging.basicConfig(
-	level = logging.DEBUG,
-	filename="parselog.txt",
-	filemode="w",
-	format="%(filename)10s:%(lineno)4d:%(message)s",
-)
-log = logging.getLogger()
 parser = yacc.yacc(debug=True)
 
-
 if __name__ == "__main__":
+        import logging
+        logging.basicConfig(
+                level = logging.DEBUG,
+                filename="parselog.txt",
+                filemode="w",
+                format="%(filename)10s:%(lineno)4d:%(message)s",
+        )
+        log = logging.getLogger()
+
         while True:
                 try: 
                         s = raw_input('set>')
