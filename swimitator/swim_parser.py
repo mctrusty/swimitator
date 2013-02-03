@@ -14,7 +14,7 @@ def p_workout(p):
 	set_list : set_list set
         set_list : set_list multi_set
 	"""
-        if len(p)==1:
+        if len(p) == 2:
                 p[0] = SetList()
         else:
                 p[0] = p[1].add_set(p[2])
@@ -41,7 +41,7 @@ def p_set(p):
 	if len(p) == 1:
 		p[0] = []
 	else:
-		p[0] = Set("set",[p[1] ,p[2], p[3],p[4]])
+		p[0] = Set([p[1] ,p[2], p[3],p[4]])
         
 def p_empty(p):
 	'empty :'

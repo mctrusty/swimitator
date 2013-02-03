@@ -2,7 +2,7 @@ class Node:
         pass
 
 class SetList(Node):
-        def __init__(self, set, repeats=1):
+        def __init__(self, set=None, repeats=1):
                 self.type = "set_list"
                 if set:
                         self.set_list= [set]
@@ -27,8 +27,8 @@ class MultiSet(Node):
                 self.repeats = repeats
                 
 class Set(Node):
-        def __init__(self, type, children=None, leaf=None):
-		self.type = type
+        def __init__(self, children=None, leaf=None):
+		self.type = "set"
 		if children:
 			self.children = children
 		else:
