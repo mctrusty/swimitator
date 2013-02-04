@@ -20,7 +20,16 @@ Swim Parser
 Node - class for AST nodes.
 ===================================
 .. autoclass:: Node.Node
-.. autoclass:: SetList
+.. autoclass:: Node.SetList
+.. autoclass:: Node.MultiSet
+.. autoclass:: Node.Set
+.. autoclass:: Node.Count
+.. autoclass:: Node.Interval
+.. autoclass:: Node.Zone
+.. autoclass:: Node.Kick
+.. autoclass:: Node.Drill
+.. autoclass:: Node.Stroke
+
 
 
 Indices and tables

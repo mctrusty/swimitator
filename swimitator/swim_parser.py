@@ -1,7 +1,15 @@
-# coding: utf-8
-# swim_parser parses a shorthand language often used to notate swimming workouts
-# it uses David Beazley's PLY parser to do the parsing 
-# @author: Michael J. Cox
+# /usr/bin/python
+
+# Copyright 2013 Michael J. Cox
+
+"""
+Parses a shorthand language often used to notate swimming
+workouts.
+
+It uses David Beazley's PLY lex/yacc libraries.
+
+**parser**: parser object loaded with the swim language.
+"""
 
 from ply import lex
 from ply import yacc
