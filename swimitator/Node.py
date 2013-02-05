@@ -3,6 +3,9 @@ class Node:
     Base class for swim AST.
     """
 
+    def accept(self, visitor):
+        visitor.visit_Node(self)
+
     def xstr(self, s):
         """
         Returns an empty string if the string passed in NoneType.
