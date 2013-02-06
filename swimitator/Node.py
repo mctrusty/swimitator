@@ -2,7 +2,8 @@ class Node:
     """
     Base class for swim AST.
     """
-
+    children = []
+    
     def accept(self, visitor):
         visitor.visit_Node(self)
 
@@ -19,20 +20,20 @@ class SetList(Node):
 
 
     """
-    def __init__(self, set=None, repeats=1):
+    def __init__(self, child=None, repeats=1):
         self.type = "set_list"
-        if set:
-            self.set_list= [set]
+        if child:
+            self.children= [child]
         else:
-            self.set_list = []
+            self.children = []
         self.repeats = repeats
 
     def add_set(self, set):
-        self.set_list.append(set)
+        self.children.append(child)
         return self
 
     def get_all_sets(self):
-        return self.set_list
+        return self.children
 
 class MultiSet(Node):
     """
@@ -92,8 +93,8 @@ class Count(Node):
         self.reps = reps
         self.distance = value
 
-    def __repr__(self):
-        return "<reps>" + self.xstr(self.reps) + "</reps>" + "<distance>" + self.xstr(self.distance) + "</distance>"
+#    def __repr__(self):
+#        return "<reps>" + self.xstr(self.reps) + "</reps>" + "<distance>" + self.xstr(self.distance) + "</distance>"
 
 class Interval(Node):
     """
@@ -105,8 +106,8 @@ class Interval(Node):
         self.minutes = minutes
         self.seconds = seconds
 
-    def __repr__(self):
-        return str(self.minutes * 60 + self.seconds)
+#    def __repr__(self):
+#        return str(self.minutes * 60 + self.seconds)
 
     def total_seconds(self):
         return self.minutes * 60 + self.seconds
@@ -125,8 +126,8 @@ class Zone(Node):
         self.type="zone"
         self.zone = zone
 
-    def __repr__(self):
-        return "<zone>" + self.xstr(self.zone) + "</zone>"
+#    def __repr__(self):
+#        return "<zone>" + self.xstr(self.zone) + "</zone>"
 
 class Kick(Node):
     """
@@ -136,8 +137,8 @@ class Kick(Node):
         self.type="kick"
         self.stroke = stroke
 
-    def __repr__(self):
-        return self.stroke
+#    def __repr__(self):
+#        return self.stroke
 
 class Drill(Node):
     """
@@ -148,8 +149,8 @@ class Drill(Node):
         self.stroke = stroke
         self.drill = drill
 
-    def __repr__(self):
-        return self.drill + ' ' + self.stroke
+#    def __repr__(self):
+#        return self.drill + ' ' + self.stroke
 
 class Stroke(Node):
     """
@@ -163,5 +164,5 @@ class Stroke(Node):
         self.type = "stroke"
         self.stroke = stroke
 
-    def __repr__(self):
-        return "<stroke>" + self.xstr(self.stroke) + "</stroke>"
+#    def __repr__(self):
+ #       return "<stroke>" + self.xstr(self.stroke) + "</stroke>"
