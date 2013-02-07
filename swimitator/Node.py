@@ -74,7 +74,7 @@ class Set(Node):
         else:
             self.children = []
         self.leaf = leaf
-
+        
     #def __repr__(self):
     #    return self.children
 
@@ -93,8 +93,8 @@ class Count(Node):
         self.reps = reps
         self.distance = value
 
-#    def __repr__(self):
-#        return "<reps>" + self.xstr(self.reps) + "</reps>" + "<distance>" + self.xstr(self.distance) + "</distance>"
+    def __unicode__(self):
+        return "<reps>" + self.xstr(self.reps) + "</reps>" + "<distance>" + self.xstr(self.distance) + "</distance>"
 
 class Interval(Node):
     """
