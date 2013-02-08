@@ -6,7 +6,13 @@
 A set of Node classes for representing parts of "swim workout" notation.
 """
 
-class Node:
+def xstr(s):
+        """
+        Returns an empty string if the string passed in NoneType.
+        """
+        return '' if s is None else str(s)
+
+class Node():
     """
     Base class for swim AST.
     """
