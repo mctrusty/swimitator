@@ -32,7 +32,17 @@ def stream_traverse(root, callback):
         for child in root.children:
             for n in stream_traverse(child, callback):
                 yield n
-        
+
+def visitor_traverse(root, visitor):
+    """
+    Accepts a visitor and calls the visit function.
+    """
+    if (root):
+        root.accept(visitor)
+
+        for child in root.children:
+            visitor_traverse(child, visitor)
+    
 if __name__=="__main__":
     import swim_parser
     import sys

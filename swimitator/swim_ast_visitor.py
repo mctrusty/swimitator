@@ -1,12 +1,23 @@
+from Node import *
+
 class SwimAstVisitor():
     """
-    Base class for visitor to traverse language parsed by the
+    Base class for visitor that processes language parsed by the
     swimitator swim_parser.
     """
 
-    def visit_Node(self, node):
+    def visit(self, node):
         """
         Visit the base Node instance.
         """
-        print "visiting " + node.type
+        if isinstance(node, Set):
+            self.visit_Set(node)
+        if node.type:
+            print "visiting " + node.type
+            
+    def visit_Set(self, set):
+        print "<set>"        
+
         
+        
+    

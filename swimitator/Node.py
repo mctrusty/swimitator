@@ -1,3 +1,11 @@
+#!/usr/bin/python
+
+# Copyright 2013 Michael J. Cox
+
+"""
+A set of Node classes for representing parts of "swim workout" notation.
+"""
+
 class Node:
     """
     Base class for swim AST.
@@ -5,7 +13,7 @@ class Node:
     children = []
     
     def accept(self, visitor):
-        visitor.visit_Node(self)
+        visitor.visit(self)
 
     def xstr(self, s):
         """
