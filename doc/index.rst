@@ -16,6 +16,10 @@ Swim Parser
 ===========
 .. automodule:: swim_parser
 
+AST
+===
+.. automodule:: traversal
+.. autofunction:: traverse
 
 Node - class for AST nodes.
 ===================================

@@ -14,7 +14,7 @@ It uses David Beazley's PLY lex/yacc libraries.
 from ply import lex
 from ply import yacc
 from swim_lexer import tokens
-from Node import *
+from swim_ast.node import *
 
 def p_workout(p):
         """
