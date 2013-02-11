@@ -1,7 +1,7 @@
 import sys
 sys.path.append("..\\swimitator")
 
-import Node
+import swim_ast.node as node
 import swim_parser
 import unittest
 
@@ -18,27 +18,41 @@ class TestSwimParser(unittest.TestCase):
         """
         s = ""
         res = self.parser.parse(s)
-        self.assertEqual(isinstance(res, Node.SetList), True)
-        self.assertEqual(res.set_list, [])
+        self.assertEqual(isinstance(res, node.SetList), True)
+        self.assertEqual(res.children, [])
 
     def test_simple_set(self):
         """
-        Check to see that a basic set returns a SetList object
+        Check to see that a basic set returns a SetList object and
+        returns the correct number of reps and distance
         """
         s = "10 x 100"
         res = self.parser.parse(s)
-        self.assertTrue(isinstance(res, Node.SetList))
+        self.assertTrue(isinstance(res, node.SetList))
 
         child = res.get_all_sets()[0].children[0]
-        expected = Node.Count(10,100)
+        expected = node.Count(10,100)
 
-        #have to cast child and expected to strings right now bc
-        #comparing 2 different objects, albeit with the same exact
-        #values results in a fail. Might look at overriding the object
-        #hashing methods at some point to change that.
-        self.assertEqual(str(child),str(expected))
-        
-        
+        self.assertEqual(child.reps,expected.reps)
+        self.assertEqual(child.distance, expected.distance)
+
+    def test_nested_set(self):
+        """
+        Check to see that a nested set returns a multiset object
+        """
+        s = "2x{10x100 fly @2:00}"
+        res = self.parser.parse(s)
+        self.assertTrue(isinstance(res.children[0], node.MultiSet))
+
+    def test_no_distance(self):
+        """
+        Check that a missing distance field throws an error
+        """
+        s = "2x fr"
+        with self.assertRaises(TypeError):
+            self.parser.parse(s)
+        #self.assertRaises(TypeError, self.parser.parse, s)
+    
 if __name__ == "__main__":
     suite = unittest.TestLoader().loadTestsFromTestCase(TestSwimParser)
     unittest.TextTestRunner(verbosity=2).run(suite)

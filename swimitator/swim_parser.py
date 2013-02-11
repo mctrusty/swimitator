@@ -119,7 +119,7 @@ def p_interval(p):
 		p[0] = Interval(0,0)
 		
 def p_error(p):
-	raise TypeError("Unknown Text '%s'" % (t.value,))
+	raise TypeError("Unknown Text '%s'" % (p.type))
 
 parser = yacc.yacc(debug=True)
 
