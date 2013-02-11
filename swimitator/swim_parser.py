@@ -10,7 +10,6 @@ It uses David Beazley's PLY lex/yacc libraries.
 
 **parser**: parser object loaded with the swim language.
 """
-
 from ply import lex
 from ply import yacc
 from swim_lexer import tokens
@@ -50,6 +49,14 @@ def p_set(p):
 		p[0] = []
 	else:
 		p[0] = Set([p[1] ,p[2], p[3],p[4]])
+
+def p_set_error(p):
+        """
+        set : error skill zone interval
+        set : error kick zone interval
+        """
+        print "reps or distance error"
+        raise SyntaxError
         
 def p_empty(p):
 	'empty :'
@@ -119,7 +126,14 @@ def p_interval(p):
 		p[0] = Interval(0,0)
 		
 def p_error(p):
-	raise TypeError("Unknown Text '%s'" % (p.type))
+        if p == None:
+                print "missing token"
+                raise TypeError("Token Missing")
+        else:
+                print "Syntax error at token, unexpected", p.type, "on line", str(p.lineno)
+#	raise TypeError("Unknown Text '%s'" % (p.type))               
+        yacc.errok()
+
 
 parser = yacc.yacc(debug=True)
 
