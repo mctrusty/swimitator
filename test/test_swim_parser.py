@@ -1,3 +1,4 @@
+import pdb
 import sys
 sys.path.append("..\\swimitator")
 
@@ -42,16 +43,55 @@ class TestSwimParser(unittest.TestCase):
         """
         s = "2x{10x100 fly @2:00}"
         res = self.parser.parse(s)
-        self.assertTrue(isinstance(res.children[0], node.MultiSet))
+        self.assertIsInstance(res.children[0], node.MultiSet)
 
-    def test_no_distance(self):
+    def test_kick_set(self):
+        """
+        Check to see that a kick set creates the correct object
+        """
+        s = "2x100 K @1:00"
+        res = self.parser.parse(s)
+        kick = res.get_all_sets()[0].children[1]
+        self.assertIsInstance(kick, node.Kick)
+        
+    def test_zone_entry(self):
+        """
+        Check to see that entering a zone creates a zone object
+        """
+        s = "10x50 fly EN3 @1"
+        res = self.parser.parse(s)
+        zone = res.get_all_sets()[0].children[2]
+        self.assertIsInstance(zone, node.Zone)
+
+    def test_interval_entry(self):
+        """
+        Check to see that entering an interval creates an Interval
+        node object
+        """
+        s = "10x50 fly EN3 @1:30"
+        res = self.parser.parse(s)
+        interval = res.get_all_sets()[0].children[3]
+        self.assertIsInstance(interval, node.Interval)
+        
+    def test_missing_distance(self):
         """
         Check that a missing distance field throws an error
         """
-        s = "2x fr"
-        with self.assertRaises(TypeError):
+        s = "2x kick"
+        self.assertRaises(TypeError, self.parser.parse, s)
+
+    def test_empty_distance_at_string_end(self):
+        """
+        Check that an empty ditance value at the end of a string
+        raises a Missing Token error
+        """
+        s = "2x "
+        with self.assertRaises(TypeError) as err:
             self.parser.parse(s)
-        #self.assertRaises(TypeError, self.parser.parse, s)
+
+        the_exception = err.exception
+        self.assertEqual(the_exception[0], 'Token Missing')
+
     
 if __name__ == "__main__":
     suite = unittest.TestLoader().loadTestsFromTestCase(TestSwimParser)
