@@ -8,32 +8,32 @@ class SwimXmlVisitor(SwimAstVisitor):
     """
             
     def visit_set(self, node):
-        print "<set>"
+        node.xml = "<set>"
 
     def visit_setlist(self, node):
-        print "<setlist>"
+        node.xml = "<setlist>"
 
     def visit_multiset(self, node):
-        print "<multiset>"
-        print "<reps>" + str(node.repeats) + "<\reps>"
+        node.xml = "<multiset>"
+        node.xml = "<reps>" + str(node.repeats) + "<\reps>"
 
     def visit_count(self, node):
-        print "<reps>" + xstr(node.reps) + "</reps>" + "<distance>" + xstr(node.distance) + "</distance>"
+        node.xml = "<reps>" + xstr(node.reps) + "</reps>" + "<distance>" + xstr(node.distance) + "</distance>"
 
     def visit_interval(self, node):
-        print "<time>" + xstr(node.minutes * 60 + node.seconds) + "</time>"
+        node.xml = "<time>" + xstr(node.minutes * 60 + node.seconds) + "</time>"
 
     def visit_zone(self, node):
-        print "<zone>" + xstr(node.zone) + "</zone>"
+        node.xml = "<zone>" + xstr(node.zone) + "</zone>"
 
     def visit_kick(self, node):
-        print "<skill>kick</skill>"
+        node.xml = "<skill>kick</skill>"
 
     def visit_drill(self, node):
-        print "<skill>drill</skill>"
+        node.xml = "<skill>drill</skill>"
 
     def visit_stroke(self, node):
-        print "<stroke>" + xstr(node.stroke) + "</stroke>"
+        node.xml = "<stroke>" + xstr(node.stroke) + "</stroke>"
                 
     
 class SwimXmlCloseVisitor(SwimAstVisitor):
@@ -42,10 +42,10 @@ class SwimXmlCloseVisitor(SwimAstVisitor):
     """
 
     def visit_set(self, node):
-        print "</set>"
+        node.xml = "</set>"
 
     def visit_setlist(self, node):
-        print "</setlist>"
+        node.xml = "</setlist>"
 
     def visit_multiset(self, node):
-        print "</multiset>"
+        node.xml = "</multiset>"

@@ -47,7 +47,7 @@ def visitor_traverse(root, visitor):
         for child in root.children:
             visitor_traverse(child, visitor)
 
-def xml_traverse(root, visitor, close_visitor):
+def xml_traverse(root, visitor, close_visitor, out=[]):
     """
     Basically does a pre-order traversal with the first visitor and
     then a post-order traversal with a "closer_visitor" that provides
@@ -55,11 +55,15 @@ def xml_traverse(root, visitor, close_visitor):
     """
     if (root):
         root.accept(visitor)
+        out.append(root.xml)
 
         for child in root.children:
             xml_traverse(child, visitor, close_visitor)
 
         root.accept(close_visitor)
+        out.append(root.xml)
+
+    return out
         
 if __name__=="__main__":
     import swim_parser

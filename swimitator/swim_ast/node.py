@@ -20,7 +20,7 @@ class Node():
     
     def accept(self, visitor):
         visitor.visit(self)
-
+    
     def xstr(self, s):
         """
         Returns an empty string if the string passed in NoneType.
