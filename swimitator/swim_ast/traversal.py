@@ -58,7 +58,7 @@ def xml_traverse(root, visitor, close_visitor, out=[]):
         out.append(root.xml)
 
         for child in root.children:
-            xml_traverse(child, visitor, close_visitor)
+            xml_traverse(child, visitor, close_visitor, out)
 
         root.accept(close_visitor)
         out.append(root.xml)

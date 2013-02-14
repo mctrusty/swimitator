@@ -7,5 +7,7 @@ def get_xml(workout):
     res = p.parse(workout)
     sv = SwimXmlVisitor()
     cv = SwimXmlCloseVisitor()
-    t = traversal.xml_traverse(res, sv, cv)
-    return t
+    out = []
+    
+    traversal.xml_traverse(res, sv, cv, out)
+    return out
