@@ -43,7 +43,7 @@ class SetList(Node):
         self.repeats = repeats
 
     def add_set(self, set):
-        self.children.append(child)
+        self.children.append(set)
         return self
 
     def get_all_sets(self):

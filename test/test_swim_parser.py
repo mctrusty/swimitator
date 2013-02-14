@@ -1,4 +1,3 @@
-import pdb
 import sys
 sys.path.append("..\\swimitator")
 
@@ -11,6 +10,9 @@ class TestSwimParser(unittest.TestCase):
     
     def setUp(self):
         self.parser = swim_parser.parser
+
+    def cleanUp(self):
+        self.parser = None
         
     def test_empty_set(self):
         """
@@ -72,7 +74,17 @@ class TestSwimParser(unittest.TestCase):
         res = self.parser.parse(s)
         interval = res.get_all_sets()[0].children[3]
         self.assertIsInstance(interval, node.Interval)
-        
+
+    def test_multiple_children_in_multi_set(self):
+        """
+        Check to see that multiple children can be added to a
+        multiple set
+        """
+        s = "2 x {3 x 50 fly @1:00 2 x 50 K @1:00}"
+        res = self.parser.parse(s)
+        sets = res.get_all_sets()[0].children
+        assertEqual(children.count, 2)
+    
     def test_missing_distance(self):
         """
         Check that a missing distance field throws an error
@@ -91,6 +103,7 @@ class TestSwimParser(unittest.TestCase):
 
         the_exception = err.exception
         self.assertEqual(the_exception[0], 'Token Missing')
+        
 
     
 if __name__ == "__main__":
