@@ -60,8 +60,11 @@ def xml_traverse(root, visitor, close_visitor, out=[]):
         for child in root.children:
             xml_traverse(child, visitor, close_visitor, out)
 
+        # set root.xml to None to prohibit double tagging fields that don't have closing tags
+        root.xml = None		
         root.accept(close_visitor)
-        out.append(root.xml)
+        if root.xml:
+            out.append(root.xml)
 
     return out
         
