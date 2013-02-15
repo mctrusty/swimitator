@@ -62,10 +62,10 @@ class MultiSet(Node):
         }
 
     """
-    def __init__(self, children, repeats=1):
+    def __init__(self, child, repeats=1):
         self.type = "multi_set"
-        if children:
-            self.children = children
+        if child:
+            self.children = [child]
         else:
             self.children = []
         self.repeats = repeats

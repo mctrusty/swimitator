@@ -10,4 +10,4 @@ def get_xml(workout):
     out = []
     
     traversal.xml_traverse(res, sv, cv, out)
-    return ''.join(out)
+    return '\n'.join(out)

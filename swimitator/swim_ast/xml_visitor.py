@@ -14,8 +14,7 @@ class SwimXmlVisitor(SwimAstVisitor):
         node.xml = "<setlist>"
 
     def visit_multiset(self, node):
-        node.xml = "<multiset>"
-        node.xml = "<reps>" + str(node.repeats) + "<\reps>"
+        node.xml = "<multiset><reps>" + str(node.repeats) + "</reps>"
 
     def visit_count(self, node):
         node.xml = "<reps>" + xstr(node.reps) + "</reps>" + "<distance>" + xstr(node.distance) + "</distance>"
