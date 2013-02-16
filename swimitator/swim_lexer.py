@@ -22,7 +22,7 @@ tokens = (
 t_ignore = ' \t'
 
 def t_newline(t):
-	r"\n"
+	r"\n|\r\n"
 	t.lexer.lineno += len(t.value)
 	
 t_AT = (r"@")
