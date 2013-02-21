@@ -1,3 +1,4 @@
+
 from node import *
 
 class SwimAstVisitor():
@@ -27,7 +28,7 @@ class SwimAstVisitor():
         if isinstance(node, Zone):
             self.visit_zone(node)
         if isinstance(node, Kick):
-            self.visit_stroke(node)
+            self.visit_kick(node)
         if isinstance(node, Drill):
             self.visit_drill(node)
         if isinstance(node, Stroke):

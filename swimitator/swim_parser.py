@@ -43,7 +43,6 @@ def p_super_set(p):
 def p_set(p):
 	"""
 	set : count skill zone interval
-	    | count kick zone interval
 	"""
 	if len(p) == 1:
 		p[0] = []
@@ -53,7 +52,6 @@ def p_set(p):
 def p_set_error(p):
         """
         set : error skill zone interval
-        set : error kick zone interval
         """
         print "reps or distance error"
         raise SyntaxError
@@ -92,10 +90,10 @@ def p_skill_drill(p):
 	else:
 		p[0] = Drill('choice',p[1])
 
-def p_kick(p):
+def p_skill_kick(p):
 	"""
-	kick : KICK
-	     | STROKE KICK
+	skill : KICK
+	      | STROKE KICK
 	"""
 	if len(p) == 3:
 		p[0] = Kick(p[1])
