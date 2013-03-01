@@ -41,7 +41,7 @@ t_KICK = ( r"[Kk](ick)?")
 
 t_DRILL = ( r"[Dd]r(ill)?")
 
-t_STROKE = ( r"[Cc]h(oice)?|[Ff]ly?|[Bb]r(east)?|[Bb](a|k)(ck)?|[Ff]r(ee)?")
+t_STROKE = ( r"[Cc]h(oice)?|[Ff]ly?|[Bb]r(east)?|[Bb](a|k)(ck)?|[Ff]r(ee)?|[Ii][Mm]")
 
 t_ZONE = (
     r"(EN|ZONE)\s?\d+"
