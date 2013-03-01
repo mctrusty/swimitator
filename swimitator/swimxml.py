@@ -8,6 +8,6 @@ def get_xml(workout):
     sv = SwimXmlVisitor()
     cv = SwimXmlCloseVisitor()
     out = []
-    
     traversal.xml_traverse(res, sv, cv, out)
+    out.insert(0, '<?xml version="1.0" encoding="utf-8"?>')
     return '\n'.join(out)
