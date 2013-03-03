@@ -11,7 +11,7 @@ class SwimXmlVisitor(SwimAstVisitor):
         node.xml = "<set>"
 
     def visit_setlist(self, node):
-        node.xml = "<setlist>"
+        node.xml = "<setlist xmlns=\"http://swimparser.appspot.com/xml\">"
 
     def visit_multiset(self, node):
         node.xml = "<multiset><reps>" + str(node.repeats) + "</reps>"
