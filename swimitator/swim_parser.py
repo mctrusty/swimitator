@@ -17,8 +17,7 @@ from swim_ast.node import *
 
 def p_workout(p):
         """
-        set_list : empty
-	set_list : set_list set
+		set_list : set_list set
         set_list : set_list multi_set
 	"""
         if len(p) == 2:
@@ -28,8 +27,8 @@ def p_workout(p):
 
 def p_set_list(p):
 	"""
-	set_list : set
-                 | multi_set
+		set_list : set
+					| multi_set
 	"""
 	p[0] = SetList(p[1])
 

@@ -11,7 +11,6 @@ tokens = (
     "KICK",
     "DRILL",
     "STROKE",
-    "OTHER",
     "NUMBER",
     "MULT",
     "COLON",
