@@ -55,15 +55,26 @@ def t_NUMBER(t):
 def t_error(t):
     raise TypeError("Unknown text '%s'" % (t.value,))
     
-lex.lex()
+lexer = lex.lex()
+
+def dump_tokens(w):
+	"""Return a string of tokens for a given input string.
+		
+		params:
+		w - workout string
+		
+	"""
+	out = []
+	lexer.input(w)
+	while True:
+		tok = lexer.token()
+		if not tok: break
+		out.append(tok.type)
+	return ' '.join(out)
 
 if __name__ == "__main__":
-	wkout = """3 x { 
-		2x50 fr @1:00 
-		1x100 drill @2 
-		}
-		10 x 100 K EN3 @1:30
-	"""
-	lex.input(wkout)	
-	for tok in iter(lex.token, None):
-		print repr(tok.type), repr(tok.value)
+	import sys
+	if not len(sys.argv) == 2:
+		print "usage swim_lexer workout"
+	else:
+		print dump_tokens(sys.argv[1])
