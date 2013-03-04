@@ -4,7 +4,6 @@
 # @author: Michael J. Cox
 
 from ply import lex
-import re
 
 tokens = (
     "L_BRACKET",
@@ -43,11 +42,9 @@ t_DRILL = ( r"[Dd]r(ill)?")
 
 t_STROKE = ( r"[Cc]h(oice)?|[Ff]ly?|[Bb]r(east)?|[Bb](a|k)(ck)?|[Ff]r(ee)?|[Ii][Mm]")
 
-def t_ZONE(t):
-	r"(EN|[Zz](one|ONE)?)\s?\d+"
-	m = re.search(r'\d+', t.value)
-	t.value = int(m.group(0))
-	return t
+t_ZONE = (
+    r"(EN|[Zz](one|ONE)?)\s?\d+"
+)
 
 def t_NUMBER(t):
     r"\d+"
