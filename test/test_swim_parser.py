@@ -83,7 +83,7 @@ class TestSwimParser(unittest.TestCase):
         s = "2 x {3 x 50 fly @1:00 2 x 50 K @1:00}"
         res = self.parser.parse(s)
         sets = res.get_all_sets()[0].children
-        assertEqual(children.count, 2)
+        self.assertEqual(len(sets[0].children), 2)
     
     def test_missing_distance(self):
         """
