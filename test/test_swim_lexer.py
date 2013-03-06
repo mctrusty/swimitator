@@ -82,6 +82,11 @@ class TestSwimLexer(unittest.TestCase):
 			res = swim_lexer.dump_tokens(str(num))
 			self.assertEqual(res, 'NUMBER')
 			
+	def test_number_values(self):
+		for num in range(1,11):
+			res = swim_lexer.dump_token_info(str(num))
+			self.assertEqual(res[0].value, num)
+	
 	def test_choice_token(self):
 		choice = ('ch', 'Ch', 'choice', 'Choice')
 		for ch in choice:
