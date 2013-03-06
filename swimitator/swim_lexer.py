@@ -71,6 +71,22 @@ def dump_tokens(w):
 		out.append(tok.type)
 	return ' '.join(out)
 
+def dump_token_info(w):
+	"""Return a list of LexTokens for a given input string.
+		
+		params:
+		w - workout string
+		
+	"""
+	out = []
+	lexer.input(w)
+	while True:
+		tok = lexer.token()
+		if not tok: break
+		out.append(tok)
+	return out
+
+	
 if __name__ == "__main__":
 	import sys
 	if not len(sys.argv) == 2:

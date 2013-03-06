@@ -15,6 +15,38 @@ class TestSwimLexer(unittest.TestCase):
 		result = swim_lexer.dump_tokens(s)
 		self.assertEqual(result, '')
 		
+	def test_newline_no_token(self):
+		newlines=('\n', '\r\n')
+		for newline in newlines:
+			res = swim_lexer.dump_tokens(newline)
+			self.assertEqual(res, '')
+		
+	def test_at_token(self):
+		at = "@"
+		res = swim_lexer.dump_tokens(at)
+		self.assertEqual(res, 'AT')
+		
+	def test_l_brace_token(self):
+		l = "{"
+		res = swim_lexer.dump_tokens(l)
+		self.assertEqual(res, 'L_BRACKET')
+		
+	def test_r_brace_token(self):
+		r = "}"
+		res = swim_lexer.dump_tokens(r)
+		self.assertEqual(res, 'R_BRACKET')
+
+	def test_colon_token(self):
+		c = ":"
+		res = swim_lexer.dump_tokens(c)
+		self.assertEqual(res, 'COLON')
+
+	def test_mult_token(self):
+		ms = ('x', 'X')
+		for m in ms:
+			res = swim_lexer.dump_tokens(m)
+			self.assertEqual(res, 'MULT')
+		
 	def test_free_stroke_token(self):
 		free = ('Fr', 'fr', 'Free', 'free')
 		for fr in free:
@@ -44,6 +76,11 @@ class TestSwimLexer(unittest.TestCase):
 		for i in im:
 			res = swim_lexer.dump_tokens(i)
 			self.assertEqual(res, 'STROKE')
+
+	def test_number_token(self):
+		for num in range(1,11):
+			res = swim_lexer.dump_tokens(str(num))
+			self.assertEqual(res, 'NUMBER')
 			
 	def test_choice_token(self):
 		choice = ('ch', 'Ch', 'choice', 'Choice')
@@ -69,6 +106,13 @@ class TestSwimLexer(unittest.TestCase):
 			res = swim_lexer.dump_tokens(z)
 			self.assertEqual(res, 'ZONE')
 
+	def test_error(self):
+		tok = 'NOSE'
+		with self.assertRaises(TypeError) as err:
+			res = swim_lexer.dump_tokens(tok)
+
+		the_exception = err.exception
+		self.assertEqual(err.exception[0], "Unknown text 'NOSE'" )
 	
 	def tearDown(self):
 		self.lexer = None
