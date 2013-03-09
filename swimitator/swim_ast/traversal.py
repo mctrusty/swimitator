@@ -67,7 +67,30 @@ def xml_traverse(root, visitor, close_visitor, out=[]):
             out.append(root.xml)
 
     return out
-        
+
+def json_traverse(root, visitor, close_visitor, out=[]):
+    """
+    Basically does a pre-order traversal with the first visitor and
+    then a post-order traversal with a "closer_visitor" that provides
+    closing tags.
+	
+    """
+    if (root):
+        root.accept(visitor)
+        out.append(root.json)
+
+        for child in root.children:
+            json_traverse(child, visitor, close_visitor, out)
+
+        # set root.xml to None to prohibit double tagging fields that don't have closing tags
+        root.json = None		
+        root.accept(close_visitor)
+        if root.json:
+            out.append(root.json)
+
+    return out
+
+	
 if __name__=="__main__":
     import swim_parser
     import sys

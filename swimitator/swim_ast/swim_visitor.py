@@ -23,16 +23,16 @@ class SwimAstVisitor():
             self.visit_multiset(node)
         if isinstance(node, Count):
             self.visit_count(node)
-        if isinstance(node, Interval):
-            self.visit_interval(node)
+        if isinstance(node, Stroke):
+            self.visit_stroke(node)
         if isinstance(node, Zone):
             self.visit_zone(node)
+        if isinstance(node, Interval):
+            self.visit_interval(node)
         if isinstance(node, Kick):
             self.visit_kick(node)
         if isinstance(node, Drill):
             self.visit_drill(node)
-        if isinstance(node, Stroke):
-            self.visit_stroke(node)
             
     def visit_set(self, node):
         pass
