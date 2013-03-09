@@ -20,10 +20,8 @@ def p_workout(p):
 		set_list : set_list set
         set_list : set_list multi_set
 	"""
-        if len(p) == 2:
-                p[0] = SetList()
-        else:
-                p[0] = p[1].add_set(p[2])
+
+	p[0] = p[1].add_set(p[2])
 
 def p_set_list(p):
 	"""
