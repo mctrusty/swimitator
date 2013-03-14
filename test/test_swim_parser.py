@@ -94,7 +94,7 @@ class TestSwimParser(unittest.TestCase):
 
     def test_empty_distance_at_string_end(self):
         """
-        Check that an empty ditance value at the end of a string
+        Check that an empty distance value at the end of a string
         raises a Missing Token error
         """
         s = "2x "
@@ -103,8 +103,6 @@ class TestSwimParser(unittest.TestCase):
 
         the_exception = err.exception
         self.assertEqual(the_exception[0], 'Token Missing')
-        
-
     
 if __name__ == "__main__":
     suite = unittest.TestLoader().loadTestsFromTestCase(TestSwimParser)

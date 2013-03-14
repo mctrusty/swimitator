@@ -15,18 +15,31 @@ from ply import yacc
 from swim_lexer import tokens
 from swim_ast.node import *
 
+precedence = (
+	('nonassoc', 'R_BRACKET'),
+	('nonassoc', 'NUMBER'),
+)
+
+def p_workout_or_empty(p):
+	"""
+	workout : 
+				| set_list
+	"""
+	if len(p) == 2:
+		p[0] = p[1]
+	
 def p_workout(p):
         """
-		set_list : set_list set
-        set_list : set_list multi_set
+		set_list : set_list set %prec NUMBER
+        set_list : set_list multi_set %prec NUMBER
 	"""
 
 	p[0] = p[1].add_set(p[2])
 
 def p_set_list(p):
 	"""
-		set_list : set
-					| multi_set
+		set_list : set %prec NUMBER
+					| multi_set %prec NUMBER
 	"""
 	p[0] = SetList(p[1])
 
@@ -45,13 +58,6 @@ def p_set(p):
 		p[0] = []
 	else:
 		p[0] = Set([p[1] ,p[2], p[3],p[4]])
-
-def p_set_error(p):
-        """
-        set : error skill zone interval
-        """
-        print "reps or distance error"
-        raise SyntaxError
         
 def p_empty(p):
 	'empty :'
@@ -62,6 +68,8 @@ def p_count(p):
 	count : NUMBER
 	      | NUMBER MULT NUMBER
 	"""
+	if len(p) == 1:
+		print 'No start token'
 	if len(p) == 2:
 		p[0] = Count(1,p[1])
 	elif len(p) == 4:
@@ -129,8 +137,7 @@ def p_error(p):
 #	raise TypeError("Unknown Text '%s'" % (p.type))               
         yacc.errok()
 
-
-parser = yacc.yacc(debug=True)
+parser = yacc.yacc()
 
 if __name__ == "__main__":
         import logging

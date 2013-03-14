@@ -21,9 +21,9 @@ tokens = (
 t_ignore = ' \t'
 
 def t_newline(t):
-	r"\n|\r\n"
-	t.lexer.lineno += len(t.value)
-	
+    r"\n|\r\n"
+    t.lexer.lineno += len(t.value)
+    
 t_AT = (r"@")
 
 t_L_BRACKET = ( r"{")
@@ -56,40 +56,47 @@ def t_error(t):
     
 lexer = lex.lex()
 
+'''
+Helper methods
+-----------------------
+'''
 def dump_tokens(w):
-	"""Return a string of tokens for a given input string.
-		
-		params:
-		w - workout string
-		
-	"""
-	out = []
-	lexer.input(w)
-	while True:
-		tok = lexer.token()
-		if not tok: break
-		out.append(tok.type)
-	return ' '.join(out)
+    """Return a string of tokens for a given input string.
+        
+        params:
+        w - workout string
+        
+    """
+    out = []
+    lexer.input(w)
+    while True:
+        tok = lexer.token()
+        if not tok: break
+        out.append(tok.type)
+    return ' '.join(out)
 
 def dump_token_info(w):
-	"""Return a list of LexTokens for a given input string.
-		
-		params:
-		w - workout string
-		
-	"""
-	out = []
-	lexer.input(w)
-	while True:
-		tok = lexer.token()
-		if not tok: break
-		out.append(tok)
-	return out
+    """Return a list of LexTokens for a given input string.
+        
+        params:
+        w - workout string
+        
+    """
+    out = []
+    lexer.input(w)
+    while True:
+        tok = lexer.token()
+        if not tok: break
+        out.append(tok)
+    return out
 
-	
+'''
+-----------------------
+Helper methods
+'''
 if __name__ == "__main__":
-	import sys
-	if not len(sys.argv) == 2:
-		print "usage swim_lexer workout"
-	else:
-		print dump_tokens(sys.argv[1])
+    import sys
+    if not len(sys.argv) == 2:
+        print "usage swim_lexer workout"
+    else:
+        print dump_tokens(sys.argv[1])
