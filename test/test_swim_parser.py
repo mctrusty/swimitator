@@ -20,9 +20,11 @@ class TestSwimParser(unittest.TestCase):
         child sets
         """
         s = ""
-        res = self.parser.parse(s)
-        self.assertEqual(isinstance(res, node.SetList), True)
-        self.assertEqual(res.children, [])
+        with self.assertRaises(Exception) as exc:
+            res = self.parser.parse(s)
+        
+        the_exception = exc.exception
+        self.assertEqual(the_exception[0], 'Empty Input')
 
     def test_simple_set(self):
         """

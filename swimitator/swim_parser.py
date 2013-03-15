@@ -27,6 +27,8 @@ def p_workout_or_empty(p):
 	"""
 	if len(p) == 2:
 		p[0] = p[1]
+	else:
+		raise Exception('Empty Input')
 	
 def p_workout(p):
         """
