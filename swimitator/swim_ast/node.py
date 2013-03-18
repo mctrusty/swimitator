@@ -106,10 +106,33 @@ class Count(Node):
         self.type = "count"
         self.reps = reps
         self.distance = value
-
+        self.children = [Reps(reps), Distance(value)]
+        
     def __unicode__(self):
         return "<reps>" + self.xstr(self.reps) + "</reps>" + "<distance>" + self.xstr(self.distance) + "</distance>"
 
+class Reps(Node):
+    """
+    Captures number of repetitions
+    """
+    def __init__(self, reps):
+        self.type="reps"
+        self.reps = reps
+        
+    def __unicode__(self):
+        return self.xstr(self.reps)
+        
+class Distance(Node):
+    """
+    captures distance
+    """
+    def __init__(self, distance):
+        self.type = "distance"
+        self.distance = distance
+    
+    def __unicode__(self):
+        return self.xstr(self.distance)
+        
 class Interval(Node):
     """
     Time length of a single rep in a set. Can be given in

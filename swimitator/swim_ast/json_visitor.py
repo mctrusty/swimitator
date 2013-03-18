@@ -7,26 +7,32 @@ class SwimJsonVisitor(SwimAstVisitor):
     swimitator swim_parser.
     """
     def visit_setlist(self, node):
-        node.json = '{"setlist": {'
+        node.json = '{"setlist": ['
 
     def visit_set(self, node):
-        node.json = '"set": {'
+        node.json = '{'
 
     def visit_multiset(self, node):
         node.json = '"multiset": { "reps": ' + str(node.repeats) + '"sets": '
 
     def visit_count(self, node):
-        node.json = '"reps": ' + xstr(node.reps)  + ', "distance": ' + xstr(node.distance) + ", "
+        node.json = ''
 
+    def visit_reps(self, node):
+        node.json = '"reps" : '  + xstr(node.reps) + ', '
+        
+    def visit_distance(self, node):
+        node.json = '"distance" : ' + xstr(node.distance) + ', '
+        
     def visit_stroke(self, node):
         if node.stroke:
-            node.json = '"stroke": ' + xstr(node.stroke) + ', '
+            node.json = '"stroke": "' + xstr(node.stroke) + '", '
         else:
             node.json = '"stroke": null, '
 
     def visit_zone(self, node):
         if node.zone:
-            node.json = '"zone": ' + xstr(node.zone) + ','
+            node.json = '"zone": "' + xstr(node.zone) + '",'
         else:
             node.json = '"zone": null, '
                     
@@ -46,10 +52,10 @@ class SwimJsonCloseVisitor(SwimAstVisitor):
     """
 
     def visit_set(self, node):
-        node.json = "}"
+        node.json = "},"
 
     def visit_setlist(self, node):
-        node.json = "}}"
+        node.json = "]}"
 
     def visit_multiset(self, node):
         node.json = "}"

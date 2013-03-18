@@ -17,8 +17,14 @@ class SwimXmlVisitor(SwimAstVisitor):
         node.xml = "<multiset><reps>" + str(node.repeats) + "</reps>"
 
     def visit_count(self, node):
-        node.xml = "<reps>" + xstr(node.reps) + "</reps>" + "<distance>" + xstr(node.distance) + "</distance>"
+        node.xml = '<count>'
 
+    def visit_reps(self, node):
+        node.xml = "<reps>" + xstr(node.reps) + "</reps>" 
+        
+    def visit_distance(self, node):
+        node.xml = "<distance>" + xstr(node.distance) + "</distance>"
+        
     def visit_interval(self, node):
         node.xml = "<time>" + xstr(node.minutes * 60 + node.seconds) + "</time>"
 
@@ -48,3 +54,6 @@ class SwimXmlCloseVisitor(SwimAstVisitor):
 
     def visit_multiset(self, node):
         node.xml = "</multiset>"
+        
+    def visit_count(self, node):
+        node.xml = '</count>'

@@ -90,6 +90,10 @@ def json_traverse(root, visitor, close_visitor, out=[]):
 
     return out
 
+def json_builder(root, new_json_visitor, out={}):
+	"""
+	Construct the tree by building a dict out of the node unicode strings
+	"""
 	
 if __name__=="__main__":
     import swim_parser
