@@ -38,12 +38,10 @@ class TestJsonTraversal(unittest.TestCase):
         Should return a json structure like:
         { setlist: { set: { reps: 0, yards: 1000, zone: None, stroke: None}}}
         """
-        expected = '{"setlist": {"set": {"reps": 1, "distance": 1000, "stroke": null, "zone": null, "time": 0}}}'
+        expected = '{"setlist": [{"reps": 1, "distance": 1000, "stroke": null, "zone": null, "time": 0}]}'
         s = '1000'
-        out = []
         result = self.parser.parse(s)
-        traversal.json_traverse(result, self.json_visitor, self.json_close_visitor, out)
-        actual = ''.join(out)    
+        actual = traversal.json_traverse(result, self.json_visitor, self.json_close_visitor)
         self.assertEqual(actual, expected)
 
 		
@@ -73,8 +71,6 @@ class TestXmlTraversal(unittest.TestCase):
     def test_set_with_only_distance(self):
         """
         Takes a set that is defined only by yards, e.g. 1000.
-        Should return a json structure like:
-        { setlist: { set: { reps: 0, yards: 1000, zone: None, stroke: None}}}
         """
         expected = '''<setlist xmlns="http://swimparser.appspot.com/xml">
 <set>

@@ -1,3 +1,4 @@
+import json
 import swim_parser
 import swim_ast.traversal as traversal
 from swim_ast.xml_visitor import SwimXmlVisitor, SwimXmlCloseVisitor
@@ -18,6 +19,5 @@ def get_json(workout):
     res = p.parse(workout)
     sv = SwimJsonVisitor()
     cv = SwimJsonCloseVisitor()
-    out = []
-    traversal.json_traverse(res, sv, cv, out)
-    return '\n'.join(out)
+    out = traversal.json_traverse(res, sv, cv, [])
+    return json.dumps(json.loads(out), indent = 2)

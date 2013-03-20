@@ -19,10 +19,10 @@ class SwimJsonVisitor(SwimAstVisitor):
         node.json = ''
 
     def visit_reps(self, node):
-        node.json = '"reps" : '  + xstr(node.reps) + ', '
+        node.json = '"reps": '  + xstr(node.reps) + ', '
         
     def visit_distance(self, node):
-        node.json = '"distance" : ' + xstr(node.distance) + ', '
+        node.json = '"distance": ' + xstr(node.distance) + ', '
         
     def visit_stroke(self, node):
         if node.stroke:

@@ -18,6 +18,13 @@ class Node():
     """
     children = []
     
+    def __init__(self, data):
+        self.data = data
+        self.children = []
+    
+    def add_child(self, obj):
+        self.children.append(obj)
+    
     def accept(self, visitor):
         visitor.visit(self)
     
@@ -41,6 +48,7 @@ class SetList(Node):
         else:
             self.children = []
         self.repeats = repeats
+        self.data = repeats
 
     def add_set(self, set):
         self.children.append(set)
@@ -69,6 +77,7 @@ class MultiSet(Node):
         else:
             self.children = []
         self.repeats = repeats
+        self.data = repeats
 
 class Set(Node):
     """
@@ -88,6 +97,7 @@ class Set(Node):
         else:
             self.children = []
         self.leaf = leaf
+        self.data = leaf
         
     #def __repr__(self):
     #    return self.children
@@ -106,10 +116,11 @@ class Count(Node):
         self.type = "count"
         self.reps = reps
         self.distance = value
+        self.data = {'reps' : reps, 'distance' : value}
         self.children = [Reps(reps), Distance(value)]
         
-    def __unicode__(self):
-        return "<reps>" + self.xstr(self.reps) + "</reps>" + "<distance>" + self.xstr(self.distance) + "</distance>"
+ #   def __unicode__(self):
+ #       return "<reps>" + self.xstr(self.reps) + "</reps>" + "<distance>" + self.xstr(self.distance) + "</distance>"
 
 class Reps(Node):
     """
@@ -118,6 +129,7 @@ class Reps(Node):
     def __init__(self, reps):
         self.type="reps"
         self.reps = reps
+        self.data = reps
         
     def __unicode__(self):
         return self.xstr(self.reps)
@@ -129,6 +141,7 @@ class Distance(Node):
     def __init__(self, distance):
         self.type = "distance"
         self.distance = distance
+        self.data = distance
     
     def __unicode__(self):
         return self.xstr(self.distance)
@@ -142,12 +155,13 @@ class Interval(Node):
         self.type = "interval"
         self.minutes = minutes
         self.seconds = seconds
-
-#    def __repr__(self):
-#        return str(self.minutes * 60 + self.seconds)
+        self.data = self.minutes * 60 + self.seconds
 
     def total_seconds(self):
         return self.minutes * 60 + self.seconds
+        
+    def __unicode__(self):
+        return self.xstr(self.total_seconds())
 
 class Zone(Node):
     """
@@ -162,9 +176,10 @@ class Zone(Node):
     def __init__(self, zone=""):
         self.type="zone"
         self.zone = zone
+        self.data = zone
 
-#    def __repr__(self):
-#        return "<zone>" + self.xstr(self.zone) + "</zone>"
+    def __unicode__(self):
+        self.xstr(self.zone) 
 
 class Kick(Node):
     """
@@ -173,9 +188,10 @@ class Kick(Node):
     def __init__(self, stroke="free"):
         self.type="kick"
         self.stroke = stroke
+        self.data = stroke
 
-#    def __repr__(self):
-#        return self.stroke
+    def __unicode__(self):
+        return self.xstr(self.stroke)
 
 class Drill(Node):
     """
@@ -185,9 +201,10 @@ class Drill(Node):
         self.type = "drill"
         self.stroke = stroke
         self.drill = drill
+        self. data = drill
 
-#    def __repr__(self):
-#        return self.drill + ' ' + self.stroke
+    def __unicode__(self):
+        return 'drill'
 
 class Stroke(Node):
     """
@@ -200,6 +217,7 @@ class Stroke(Node):
     def __init__(self, stroke=""):
         self.type = "stroke"
         self.stroke = stroke
+        self.data = stroke
 
-#    def __repr__(self):
- #       return "<stroke>" + self.xstr(self.stroke) + "</stroke>"
+    def __unicode__(self):
+        return self.xstr(self.stroke)

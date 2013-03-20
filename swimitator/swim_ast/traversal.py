@@ -61,7 +61,7 @@ def xml_traverse(root, visitor, close_visitor, out=[]):
             xml_traverse(child, visitor, close_visitor, out)
 
         # set root.xml to None to prohibit double tagging fields that don't have closing tags
-        root.xml = None		
+        root.xml = None        
         root.accept(close_visitor)
         if root.xml:
             out.append(root.xml)
@@ -73,7 +73,7 @@ def json_traverse(root, visitor, close_visitor, out=[]):
     Basically does a pre-order traversal with the first visitor and
     then a post-order traversal with a "closer_visitor" that provides
     closing tags.
-	
+    
     """
     if (root):
         root.accept(visitor)
@@ -83,18 +83,29 @@ def json_traverse(root, visitor, close_visitor, out=[]):
             json_traverse(child, visitor, close_visitor, out)
 
         # set root.xml to None to prohibit double tagging fields that don't have closing tags
-        root.json = None		
+        root.json = None        
         root.accept(close_visitor)
         if root.json:
             out.append(root.json)
 
-    return out
+	# End of set array gets buiilt with an exra comma at the end of the list of sets, the replace() function removes that
+    return ''.join(out).replace('},]', '}]')
 
-def json_builder(root, new_json_visitor, out={}):
-	"""
-	Construct the tree by building a dict out of the node unicode strings
-	"""
-	
+def json_builder(root, out={}):
+    """
+    Construct the tree by building a dict out of the node unicode strings
+    """
+    if (root):            
+        #for child in root.children:
+         #   json_builder(child, out)
+        return {
+			"atype" : root.type,
+			"bdata" : root.data,
+			"children" : [json_builder(child, out) for child in root.children]
+		}
+        #out[root.type] = {'data' : root.data, 'children' :  [json_builder(child, out) for child in root.children]}
+    return out
+        
 if __name__=="__main__":
     import swim_parser
     import sys
