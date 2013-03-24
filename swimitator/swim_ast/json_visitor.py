@@ -13,7 +13,7 @@ class SwimJsonVisitor(SwimAstVisitor):
         node.json = '{'
 
     def visit_multiset(self, node):
-        node.json = '"multiset": { "reps": ' + str(node.repeats) + '"sets": '
+        node.json = '{"reps": ' + str(node.repeats) + ', '
 
     def visit_count(self, node):
         node.json = ''

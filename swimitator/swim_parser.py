@@ -139,7 +139,7 @@ def p_error(p):
 #	raise TypeError("Unknown Text '%s'" % (p.type))               
         yacc.errok()
 
-parser = yacc.yacc()
+parser = yacc.yacc(debug=False)
 
 if __name__ == "__main__":
         import logging
