@@ -26,7 +26,7 @@ def p_workout_or_empty(p):
 				| set_list
 	"""
 	if len(p) == 2:
-		p[0] = p[1]
+		p[0] = Workout(p[1])
 	else:
 		raise Exception('Empty Input')
 	

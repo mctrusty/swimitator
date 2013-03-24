@@ -6,8 +6,11 @@ class SwimJsonVisitor(SwimAstVisitor):
     Base class for visitor that processes language parsed by the
     swimitator swim_parser.
     """
+    def visit_workout(self, node):
+        node.json = '{'
+        
     def visit_setlist(self, node):
-        node.json = '{"setlist": ['
+        node.json = '"setlist": ['
 
     def visit_set(self, node):
         node.json = '{'
@@ -50,12 +53,14 @@ class SwimJsonCloseVisitor(SwimAstVisitor):
     """
     Provides closing tags for xml elements that require them.
     """
-
+    def visit_workout(self, node):
+        node.json = '}'
+        
     def visit_set(self, node):
-        node.json = "},"
+        node.json = "}, "
 
     def visit_setlist(self, node):
-        node.json = "]}"
+        node.json = "]"
 
     def visit_multiset(self, node):
         node.json = "}"

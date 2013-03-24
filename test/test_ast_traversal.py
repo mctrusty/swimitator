@@ -52,7 +52,7 @@ class TestJsonTraversal(unittest.TestCase):
         s = '2 x {2 x 100 fr @1:20 2 x 100 IM @1:30}'
         result = self.parser.parse(s)
         actual = traversal.json_traverse(result, self.json_visitor, self.json_close_visitor, [])
-        expected = '{"setllist": [{"reps": 2, "setlist": [{"reps": 2, "distance": 100, "stroke": free, "zone": null, "time": 80}, {"reps": 2, "distance": 100, "stroke": IM, "zone": null, "time": 90]}}]}'
+        expected = '{"setlist": [{"reps": 2, "setlist": [{"reps": 2, "distance": 100, "stroke": "fr", "zone": null, "time": 80}, {"reps": 2, "distance": 100, "stroke": "IM", "zone": null, "time": 90}]}]}'
         self.assertEqual(actual, expected)
         
 class TestXmlTraversal(unittest.TestCase):

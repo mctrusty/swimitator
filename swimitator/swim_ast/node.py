@@ -35,10 +35,20 @@ class Node():
         return '' if s is None else str(s)
         pass
 
-class SetList(Node):
+class Workout(Node):
     """
     Contains list of sets that comprise a workout.
+    """
+    def __init__(self, child=None):
+        self.type = "workout"
+        if child:
+            self.children= [child]
+        else:
+            self.children = []
 
+class SetList(Node):
+    """
+    Contains list of sets
 
     """
     def __init__(self, child=None, repeats=1):

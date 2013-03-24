@@ -88,8 +88,8 @@ def json_traverse(root, visitor, close_visitor, out=[]):
         if root.json:
             out.append(root.json)
 
-	# End of set array gets buiilt with an exra comma at the end of the list of sets, the replace() function removes that
-    return ''.join(out).replace('},]', '}]')
+    # End of set array gets buiilt with an exra comma at the end of the list of sets, the replace() function removes that
+    return ''.join(out).replace('}, ]', '}]')
 
 def json_builder(root, out={}):
     """
@@ -99,10 +99,10 @@ def json_builder(root, out={}):
         #for child in root.children:
          #   json_builder(child, out)
         return {
-			"atype" : root.type,
-			"bdata" : root.data,
-			"children" : [json_builder(child, out) for child in root.children]
-		}
+            "atype" : root.type,
+            "bdata" : root.data,
+            "children" : [json_builder(child, out) for child in root.children]
+        }
         #out[root.type] = {'data' : root.data, 'children' :  [json_builder(child, out) for child in root.children]}
     return out
         

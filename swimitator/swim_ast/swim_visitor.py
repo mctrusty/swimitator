@@ -15,6 +15,8 @@ class SwimAstVisitor():
        #     print "visiting " + node.type
 
 #dispatch node to its proper visitor type
+        if isinstance(node, Workout):
+            self.visit_workout(node)
         if isinstance(node, Set):
             self.visit_set(node)
         if isinstance(node, SetList):
@@ -38,6 +40,9 @@ class SwimAstVisitor():
         if isinstance(node, Drill):
             self.visit_drill(node)
             
+    def visit_workout(self, node):
+        pass
+    
     def visit_set(self, node):
         pass
 

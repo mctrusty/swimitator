@@ -6,7 +6,10 @@ class SwimXmlVisitor(SwimAstVisitor):
     Base class for visitor that processes language parsed by the
     swimitator swim_parser.
     """
-            
+
+    def visit_workout(self, node):
+        node.xml = ''
+        
     def visit_set(self, node):
         node.xml = "<set>"
 
@@ -45,7 +48,9 @@ class SwimXmlCloseVisitor(SwimAstVisitor):
     """
     Provides closing tags for xml elements that require them.
     """
-
+    def visit_workout(self, node):
+        node.xml = ''
+        
     def visit_set(self, node):
         node.xml = "</set>"
 

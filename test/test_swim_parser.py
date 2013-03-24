@@ -1,3 +1,4 @@
+import pdb
 import sys
 sys.path.append("..\\swimitator")
 
@@ -33,9 +34,9 @@ class TestSwimParser(unittest.TestCase):
         """
         s = "10 x 100"
         res = self.parser.parse(s)
-        self.assertTrue(isinstance(res, node.SetList))
-
-        child = res.get_all_sets()[0].children[0]
+        self.assertTrue(isinstance(res, node.Workout))
+    
+        child = res.children[0].get_all_sets()[0].children[0]
         expected = node.Count(10,100)
 
         self.assertEqual(child.reps,expected.reps)
@@ -47,7 +48,8 @@ class TestSwimParser(unittest.TestCase):
         """
         s = "2x{10x100 fly @2:00}"
         res = self.parser.parse(s)
-        self.assertIsInstance(res.children[0], node.MultiSet)
+        actual = res.children[0].children[0]
+        self.assertIsInstance(actual, node.MultiSet)
 
     def test_kick_set(self):
         """
@@ -55,7 +57,7 @@ class TestSwimParser(unittest.TestCase):
         """
         s = "2x100 K @1:00"
         res = self.parser.parse(s)
-        kick = res.get_all_sets()[0].children[1]
+        kick = res.children[0].get_all_sets()[0].children[1]
         self.assertIsInstance(kick, node.Kick)
         
     def test_zone_entry(self):
@@ -64,7 +66,7 @@ class TestSwimParser(unittest.TestCase):
         """
         s = "10x50 fly EN3 @1"
         res = self.parser.parse(s)
-        zone = res.get_all_sets()[0].children[2]
+        zone = res.children[0].get_all_sets()[0].children[2]
         self.assertIsInstance(zone, node.Zone)
 
     def test_interval_entry(self):
@@ -74,7 +76,7 @@ class TestSwimParser(unittest.TestCase):
         """
         s = "10x50 fly EN3 @1:30"
         res = self.parser.parse(s)
-        interval = res.get_all_sets()[0].children[3]
+        interval = res.children[0].get_all_sets()[0].children[3]
         self.assertIsInstance(interval, node.Interval)
 
     def test_multiple_children_in_multi_set(self):
@@ -84,7 +86,7 @@ class TestSwimParser(unittest.TestCase):
         """
         s = "2 x {3 x 50 fly @1:00 2 x 50 K @1:00}"
         res = self.parser.parse(s)
-        sets = res.get_all_sets()[0].children
+        sets = res.children[0].get_all_sets()[0].children
         self.assertEqual(len(sets[0].children), 2)
     
     def test_missing_distance(self):
