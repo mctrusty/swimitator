@@ -1,7 +1,5 @@
-swimitator
-==========
-
-swimitator
+swimitator parser
+=================
 
 swimitator is a tool for parsing swim-style workouts of the form:
 
